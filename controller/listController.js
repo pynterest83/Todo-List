@@ -10,6 +10,7 @@ const getNotes = async (req, res) => {
 //@route POST /api/todolist
 //@access Public
 const createNote = async (req, res) => {
+    console.log("The new task is ", req.body);
     res.status(200).json({ message: "Create note" });
 }
 
