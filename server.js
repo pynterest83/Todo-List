@@ -9,6 +9,9 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
+// Serve static files
+app.use(express.static('view'));
+
 // Middleware
 app.use(express.json());
 
