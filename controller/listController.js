@@ -13,11 +13,12 @@ const getNotes = asyncHandler (async (req, res) => {
 //@access Public
 const createNote = asyncHandler (async (req, res) => {
     const {title, description, status} = req.body;
+    console.log(req.body);
     if (!title) {
         res.status(400);
         throw new Error("Please fill in this field");
     }
-    const newNote = new Note({
+    const newNote = await Note.create({
         title,
         description,
         status,

@@ -2,13 +2,18 @@ const inputTitle = document.getElementById("title");
 const inputDescription = document.getElementById("description");
 const listNotes = document.getElementById("list-container");
 const addBtn = document.getElementById("addBtn");
+const baseUrl = "http://localhost:3000/";
 
-addBtn.addEventListener("click", addTask);
+addBtn.addEventListener("click", postData);
+addBtn.addEventListener("click", addTask);		
+
 inputTitle.addEventListener("keypress", function(event) {
 	if (event.key == "Enter") {
 		addTask();
+		postData();
 	}
 });
+
 function addTask(){
 	if (inputTitle.value === ''){
 		alert("Please enter a task");
@@ -57,4 +62,21 @@ function addTask(){
 			e.target.classList.toggle("checked");
 		});
 	}
+}
+
+async function postData() {
+	if (inputTitle.value === ''){
+		alert("Please enter a task");
+	}
+	const res = await fetch(baseUrl,{
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			title: inputTitle.value,
+			description: inputDescription.value,
+			status: false
+		})
+	});
 }

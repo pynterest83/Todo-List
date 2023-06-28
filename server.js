@@ -9,14 +9,14 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-// Serve static files
-app.use(express.static('view'));
-
 // Middleware
 app.use(express.json());
 
 // Routes
-app.use("/api/todolist", require("./routes/listRoute"));
+app.use("/", require("./routes/listRoute"));
+
+// Serve static files
+app.use(express.static('view'));
 
 // Error handling middleware
 app.use(errorHandler);
