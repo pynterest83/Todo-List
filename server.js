@@ -2,21 +2,27 @@ const express = require('express');
 const errorHandler = require('./middleware/errorHandler');
 const dotenv = require('dotenv').config();
 const connectDB = require('./config/DBconnect');
+const cors = require("cors");
 
-// Connect to database
-connectDB();
 const app = express();
 
 const port = process.env.PORT || 5000;
 
+// Enable CORS
+app.use(cors());
+
+// Connect to database
+connectDB();
+
 // Middleware
 app.use(express.json());
-
-// Routes
-app.use("/", require("./routes/listRoute"));
+app.use(express.urlencoded({extended: true}))
 
 // Serve static files
 app.use(express.static('view'));
+
+// Routes
+app.use("/", require("./routes/listRoute"));
 
 // Error handling middleware
 app.use(errorHandler);
