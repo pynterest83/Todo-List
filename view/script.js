@@ -2,7 +2,7 @@ const inputTitle = document.getElementById("title");
 const inputDescription = document.getElementById("description");
 const listNotes = document.getElementById("list-container");
 const addBtn = document.getElementById("addBtn");
-const baseUrl = "http://localhost:3000/";
+const baseUrl = "http://localhost:3000/api/list/";
 
 window.addEventListener("load", getData);
 addBtn.addEventListener("click", postData);

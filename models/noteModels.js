@@ -1,7 +1,11 @@
-const moongose = require('mongoose');
-const Schema = moongose.Schema;
+const mongoose = require('mongoose');
 
-const noteSchema = new Schema({
+const noteSchema =  mongoose.Schema({
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref: "User"
+    },
     title: {
         type: String,
         required: [true, "Please fill in this field"]
@@ -20,4 +24,4 @@ const noteSchema = new Schema({
     }
 );
 
-module.exports = moongose.model("Note", noteSchema);
+module.exports = mongoose.model("Note", noteSchema);

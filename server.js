@@ -22,7 +22,8 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('view'));
 
 // Routes
-app.use("/", require("./routes/listRoute"));
+app.use("/api/list", require("./routes/listRoute"));
+app.use("/api/user", require("./routes/userRoute"));
 
 // Error handling middleware
 app.use(errorHandler);
