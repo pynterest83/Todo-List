@@ -41,6 +41,9 @@ async function getData() {
 		if (note.description == undefined) {
 			note.description = "";
 		}
+		if (note.description == "must done") {
+			content.classList.add("must-done");
+		}
 		if (note.status == true){
 			li.classList.add("checked");
 		}
