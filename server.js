@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 // Serve static files
-app.use(express.static('view'));
+app.use(express.static('views'));
 
 // Routes
 app.use("/api/list", require("./routes/listRoute"));
