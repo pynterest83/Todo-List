@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: grid;
+    place-items: center;
+}
+
+h1{
+    /* color: rgb(223, 155, 52); */
+    margin-top: 20vh;
+    margin-bottom: 30px;
+
+}
+input{
+    font-size: 1rem;
+    width: 300px;
+    padding: 6px 2px; 
+    margin: 10px 0 10px 0;
+}
+.sub{
+    background-color:rgb(223, 155, 52);
+    cursor: pointer;
+}
+
+form{
+    /* margin-top: 20vh; */
+    text-align: center;
+    border: 5px solid rgb(111, 70, 23);
+    padding: 20px;
+    background-color: rgb(239, 192, 135);
+}
+    </style>
+</head>
+<body>
+
+    <h1>Login Form</h1>
+
+    <form>
+        <input placeholder="Name" name="name" type="text" id = "username">
+        <br>
+        <input placeholder="Password" name="password" type="password" id = "password">
+        <br>
+        <button id = "login">Login</button>
+     <h3>Dont have a account ?</h3>
+    <a href="/user/register">Create a new account</a>
+    </form>
+    <script>
+        const loginBtn = document.getElementById('login');
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        loginBtn.addEventListener('click', login);
+        async function login(){
+            const res = await fetch('http://localhost:3000/user/login',{
+                method: "POST",
+                headers: {  
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username.value,
+                    password: password.value
+                })
+            });
+            username.value = "";
+            password.value = "";
+
+            if (res.status === 401){
+                alert("Invalid username or password");
+                window.location.href = "http://localhost:3000/user/login";
+            }
+            else if (res.status === 400){
+                alert("Invalid username or password");
+                window.location.href = "http://localhost:3000/user/login";
+            }
+            else if (res.status === 200){
+                window.location.href = "http://localhost:3000/list";
+            }
+        }
+    </script>
+
+    
+</body>
+</html>

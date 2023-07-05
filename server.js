@@ -3,6 +3,7 @@ const errorHandler = require('./middleware/errorHandler');
 const dotenv = require('dotenv').config();
 const connectDB = require('./config/DBconnect');
 const cors = require("cors");
+const path = require('path');
 
 const app = express();
 
@@ -18,15 +19,29 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-// Serve static files
-app.use(express.static('views'));
-
-// Routes
-app.use("/api/list", require("./routes/listRoute"));
-app.use("/api/user", require("./routes/userRoute"));
-
 // Error handling middleware
 app.use(errorHandler);
+
+app.use("/user", require("./routes/userRoute"));
+
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+    res.render("home");
+});
+
+app.get("/user/login", (req, res) => {
+    res.render("login");
+});
+app.get("/user/register", (req, res) => {
+    res.render("register");
+});
+
+app.get("/list", (req, res) => {
+    res.render("app");
+});
+
+app.use("/list", require("./routes/listRoute"));
 
 // Set up server
 app.listen(port, () => {

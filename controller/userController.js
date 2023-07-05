@@ -46,6 +46,14 @@ const loginUser = asyncHandler(async (req, res) => {
                 id: user._id
             }
         }, process.env.JWT_SECRET_KEY, {expiresIn: "15m"})
+        
+        // store token in cookie
+        res.cookie("token", access, {  
+            httpOnly: true,
+            expires: new Date(Date.now() + 900000),
+            maxAge: 900000
+        })
+        
         res.status(200).json({access})
     }
     else {
